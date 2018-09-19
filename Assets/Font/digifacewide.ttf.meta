@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 069bfa2fb7354ac4d86449fd121cfa09
+timeCreated: 1499247586
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DigifaceWide
+  fontNames:
+  - DigifaceWide
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
