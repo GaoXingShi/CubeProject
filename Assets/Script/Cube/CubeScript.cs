@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour
 {
+    public CameraLook camera;
+
     private Vector3 bianyuan;
 
     private float rotaValue;
@@ -20,7 +22,6 @@ public class CubeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (!isRotate)
         {
             bianyuan = transform.position;
@@ -39,6 +40,7 @@ public class CubeScript : MonoBehaviour
                 bianyuan.y -= bianyuan.y / 2;
                 isRotate = true;
                 angleV3 = new Vector3(1, 0, -1);
+
             }
         }
 
@@ -51,7 +53,9 @@ public class CubeScript : MonoBehaviour
                 rotaValue = 0;
                 angleV3 = Vector3.zero;
                 isRotate = false;
+                camera.GoForward(1);
             }
         }
     }
+    
 }
