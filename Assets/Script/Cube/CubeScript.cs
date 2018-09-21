@@ -15,6 +15,8 @@ public class CubeScript : MonoBehaviour
     private readonly float root2 = Mathf.Pow(2, 0.5f);
 
     private Vector3 angleV3 = Vector3.zero;
+
+    private int forwardCount = 0;
     // Use this for initialization
     void Start()
     {
@@ -25,21 +27,24 @@ public class CubeScript : MonoBehaviour
         if (!isRotate)
         {
             bianyuan = transform.position;
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
                 bianyuan.x -= root2 / 4;
                 bianyuan.z += root2 / 4;
                 bianyuan.y -= bianyuan.y / 2;
                 isRotate = true;
                 angleV3 = new Vector3(1, 0, 1);
+                SpawnManager.Instance.SpawnHeightCountAppend(1);
+
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 bianyuan.x += root2 / 4;
                 bianyuan.z += root2 / 4;
                 bianyuan.y -= bianyuan.y / 2;
                 isRotate = true;
                 angleV3 = new Vector3(1, 0, -1);
+                SpawnManager.Instance.SpawnHeightCountAppend(1);
 
             }
         }
@@ -53,7 +58,9 @@ public class CubeScript : MonoBehaviour
                 rotaValue = 0;
                 angleV3 = Vector3.zero;
                 isRotate = false;
+                forwardCount++;
                 camera.GoForward(1);
+                PlayerInfoManager.Instance.NoticeSpawnManager(forwardCount);
             }
         }
     }
