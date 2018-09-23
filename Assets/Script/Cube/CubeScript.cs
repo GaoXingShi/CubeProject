@@ -6,6 +6,9 @@ public class CubeScript : MonoBehaviour
 {
     public CameraLook camera;
 
+    [HideInInspector]
+    public bool isPause;
+
     private Vector3 bianyuan;
 
     private float rotaValue;
@@ -17,13 +20,17 @@ public class CubeScript : MonoBehaviour
     private Vector3 angleV3 = Vector3.zero;
 
     private int forwardCount = 0;
-    // Use this for initialization
-    void Start()
-    {
-    }
+
+
+
     // Update is called once per frame
     void Update()
     {
+        if (isPause)
+        {
+            return;
+        }
+
         if (!isRotate)
         {
             bianyuan = transform.position;
@@ -60,9 +67,13 @@ public class CubeScript : MonoBehaviour
                 isRotate = false;
                 forwardCount++;
                 camera.GoForward(1);
-                PlayerInfoManager.Instance.NoticeSpawnManager(forwardCount);
             }
         }
     }
-    
+
+
+    public int GetForwardCount()
+    {
+        return forwardCount;
+    }
 }

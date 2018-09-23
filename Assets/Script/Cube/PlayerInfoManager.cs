@@ -7,9 +7,14 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
 
     public CubeScript cube;
 
-    public void NoticeSpawnManager(int _forwardCount)
+    public void SetCubeState(bool _isPause)
     {
-        SpawnManager.Instance.ChangePlaneCubeSpeed(_forwardCount);
+        cube.isPause = _isPause;
+    }
+
+    public int GetCubeForwardCount()
+    {
+        return cube.GetForwardCount();
     }
 	
 }

@@ -9,35 +9,31 @@ public class PlaneCubeScript
     {
         Occupy,
         Idle,
-        Creating
+        Creating,
+        RemoveOver,
     }
-
+    public static float speed = 0.2f;
     protected int height, width;
     protected Transform currTransform;
     protected PlaneCubeState state = PlaneCubeState.Idle;
     protected Sequence sequence;
-    protected Action<bool> EnterAction;
-    protected Action ExitAction;
-    private float speed = 0.025f;
+    protected Action<bool> ExecuteActon;
     public PlaneCubeScript()
     {
         DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
-        EnterAction += RightSizeEffect;
-        EnterAction += DownSizeEffect;
-        EnterAction += LerpSizeEffect;
+        ExecuteActon += RightSizeEffect;
+        //ExecuteActon += DownSizeEffect;
+        //ExecuteActon += LerpSizeEffect;
         
     }
-
-    public void ChangeSpeedValue(float _speed)
-    {
-        speed = _speed;
-    }
+    
 
     public void Init(Transform _curr,Material _mater,int _h,int _w,Vector3 _p,Vector3 _e)
     {
         currTransform = _curr;
         height = _h;
         width = _w;
+        _curr.gameObject.SetActive(true);
         _curr.position = _p;
         _curr.eulerAngles = _e;
         _curr.localScale = Vector3.one;
@@ -47,17 +43,20 @@ public class PlaneCubeScript
         state = PlaneCubeState.Creating;
 
         sequence = DOTween.Sequence();
-        //EnterAction.GetInvocationList()[0].DynamicInvoke();
-        EnterAction.GetInvocationList()[Random.Range(0, EnterAction.GetInvocationList().Length)].DynamicInvoke(true);
+        //ExecuteActon.GetInvocationList()[0].DynamicInvoke();
+        ExecuteActon.GetInvocationList()[Random.Range(0, ExecuteActon.GetInvocationList().Length)].DynamicInvoke(true);
     }
     public void Remove()
     {
+        state = PlaneCubeState.Creating;
         sequence = DOTween.Sequence();
-        EnterAction.GetInvocationList()[Random.Range(0, EnterAction.GetInvocationList().Length)].DynamicInvoke(false);
+        ExecuteActon.GetInvocationList()[Random.Range(0, ExecuteActon.GetInvocationList().Length)].DynamicInvoke(false);
 
-        currTransform = null;
+    }
+
+    public void RemoveFinish()
+    {
         state = PlaneCubeState.Idle;
-        height = width = 0;
     }
 
     public Transform GetCurrentTransform()
@@ -69,6 +68,7 @@ public class PlaneCubeScript
     {
         return state;
     }
+    
 
     public int GetHeight()
     {
@@ -89,6 +89,19 @@ public class PlaneCubeScript
             sequence.Append(DOTween.To(() => currTransform.position, x => { currTransform.position = x; },
                 InitPos, speed * 5));
             sequence.AppendCallback(() => { state = PlaneCubeState.Occupy; });
+        }
+        else
+        {
+            Vector3 InitPos = currTransform.position + Vector3.right * 10;
+            sequence.Append(DOTween.To(() => currTransform.position, x => { currTransform.position = x; },
+                InitPos, speed * 5));
+            sequence.AppendCallback(() =>
+            {
+                state = PlaneCubeState.Idle;
+                height = width = 0;
+                currTransform.gameObject.SetActive(false);
+            });
+
         }
 
         sequence.Play();

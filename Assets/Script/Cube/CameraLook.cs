@@ -11,11 +11,12 @@ public class CameraLook : MonoBehaviour
         DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
         temp = transform.position;
     }
+    
 
     public void GoForward(int count)
     {
         temp = temp + Vector3.forward * root2 * count;
-        transform.DOMove(temp, 0.75f);
+        transform.DOMove(temp, 1).SetEase(Ease.Linear);
     }
 
 }
