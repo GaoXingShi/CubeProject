@@ -16,5 +16,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
     {
         return cube.GetForwardCount();
     }
+
+    //todo 共有方法，检查当前位置是否会导致游戏失败。
 	
 }

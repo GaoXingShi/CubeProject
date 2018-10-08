@@ -6,17 +6,12 @@
             "columnInfos":[
                 {
                     "currentColumnNumber":"0",
-                    "cubeState":"0"
+                    "cubeState":"2"
                 }
                 ,
                 {
-                    "currentColumnNumber":"1",
-                    "cubeState":"0"
-                }
-                ,
-                {
-                    "currentColumnNumber":"2",
-                    "cubeState":"0"
+                    "currentColumnNumber":"0",
+                    "cubeState":"1"
                 }
             ]
         }

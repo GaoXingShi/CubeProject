@@ -28,8 +28,8 @@ public class SpawnManager : Singleton<SpawnManager>
     private HightColoumnData spawnData;
     public void Init ()
     {
-        spawnData = LoadInfoManager.Instance.GetHightColumnData();
 
+        spawnData = LoadInfoManager.Instance.GetHightColumnData();
         changeSpeedValue += Camera.main.orthographicSize;
 
         SpawnHeightCountAppend(16);

@@ -7,6 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class HightColoumnData
 {
+    public int passNumber;
+    public bool isTime;
     public HightInfo[] hightInfos;
 }
 
@@ -26,8 +28,14 @@ public class ColumnInfo
 public enum columnCubeType
 {
     none,
-    normal,
     bomb,
+    normal,
+}
+
+[System.Serializable]
+public class PlayerCubeInfo
+{
+    public int triggerPlayerNumber;
 }
 
 public static class JsonLoadFile
