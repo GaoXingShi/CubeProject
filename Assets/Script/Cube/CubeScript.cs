@@ -9,6 +9,8 @@ public class CubeScript : MonoBehaviour
     [HideInInspector]
     public bool isPause;
 
+    private PlayerCubeInfo cubeInfo;
+
     private Vector3 bianyuan;
 
     private float rotaValue;
@@ -21,7 +23,10 @@ public class CubeScript : MonoBehaviour
 
     private int forwardCount = 0;
 
-
+    void Start()
+    {
+        cubeInfo = new PlayerCubeInfo(this);
+    }
 
     // Update is called once per frame
     void Update()
@@ -67,6 +72,7 @@ public class CubeScript : MonoBehaviour
                 isRotate = false;
                 forwardCount++;
                 camera.GoForward(1);
+                cubeInfo.GetGameTrigger(forwardCount);
             }
         }
     }
